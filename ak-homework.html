@@ -1,0 +1,77 @@
+<link rel="import" href="bower_components/polymer/polymer-element.html">
+
+<dom-module id="ak-homework">
+  <template>
+    <style>
+      :host {
+        display: block;
+        position: relative;
+        overflow: hidden;
+      }
+
+      #someTxt{
+        position: absolute;
+        top: 20px;
+        left: 10px;
+      }
+    </style>
+
+    <img src=[[imgSrc]] style="height:200px;width:400px;">
+    <h1 id="someTxt">[[someTxt]]</h1>
+    <div >
+    <p style="display:inline-block">Click button to toggle between Preview/Edit Mode:  </p>
+    <button id="btn" on-click="click" style="width:130px; height:20px; display:inline-block;">[[mode]]</button>
+    </div>
+    <br>
+    <br>
+    <div id="editMode" style="visibility: hidden">
+      Enter image URL: <input type="text" value="{{imgSrc::keyup}}" style="width:700px;"><br><br>
+      Enter text: <br><input type="text" value="{{someTxt::keyup}}"">
+    </div>
+
+  </template>
+
+  <script>
+
+    // Extend Polymer.Element base class
+    class AkHomework extends Polymer.Element {
+
+      static get is() { 
+        return 'ak-homework'
+      }
+
+      static get properties() {
+        return {
+          mode:{
+            type: String,
+            value: "Preview Mode ON"
+          },
+          imgSrc:{
+            type: String,
+            value: "https://app-layout-assets.appspot.com/assets/bg1.jpg"
+          },
+          someTxt:{
+            type:String,
+            value: "Just some text"
+          },
+        };
+      }
+
+      click() {
+        if(this.$.btn.textContent == "Preview Mode ON"){
+          this.$.btn.textContent = "Edit Mode ON";
+          this.setAttribute('edit', 'true');
+          this.$.editMode.style.visibility = "visible";
+        }else{
+          this.$.btn.textContent = "Preview Mode ON"
+          this.setAttribute('edit', 'false');
+          this.$.editMode.style.visibility = "hidden";
+        }
+      }
+    }
+
+    // Register custom element definition using standard platform API
+    customElements.define(AkHomework.is, AkHomework);
+
+  </script>
+</dom-module>

@@ -1,4 +1,5 @@
 <link rel="import" href="bower_components/polymer/polymer-element.html">
+<link rel="import" href="bower_components/app-storage/app-localstorage/app-localstorage-document.html">
 
 <dom-module id="ak-homework">
   <template>
@@ -16,6 +17,8 @@
       }
     </style>
 
+    <app-localstorage-document key="someTxt" data="{{someTxt}}"></app-localstorage-document>
+    <app-localstorage-document key="imgSrc" data="{{imgSrc}}"></app-localstorage-document>
     <img src=[[imgSrc]] style="height:200px;width:400px;">
     <h1 id="someTxt">[[someTxt]]</h1>
     <div >
@@ -26,7 +29,8 @@
     <br>
     <div id="editMode" style="visibility: hidden">
       Enter image URL: <input type="text" value="{{imgSrc::keyup}}" style="width:700px;"><br><br>
-      Enter text: <br><input type="text" value="{{someTxt::keyup}}"">
+      <!-- NOTE: you left a HTML syntax error - you should probably use some kind of syntax parser & highlighter -->
+      Enter text: <br><input type="text" value="{{someTxt::keyup}}">
     </div>
 
   </template>
@@ -36,7 +40,7 @@
     // Extend Polymer.Element base class
     class AkHomework extends Polymer.Element {
 
-      static get is() { 
+      static get is() {
         return 'ak-homework'
       }
 
